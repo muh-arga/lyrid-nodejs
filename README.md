@@ -50,3 +50,13 @@
 - Regular User:
     - username: user
     - password: user123
+
+
+## Packages Used
+- `express`: Web framework for Node.js
+- `sequelize`: ORM for database interactions
+- `bcrypt`: Library for hashing passwords
+- `multer`: Middleware for handling file uploads
+- `dotenv`: Module to load environment variables from a `.env` file
+- `mysql2`: MySQL client for Node.js
+- `ejs`: Embedded JavaScript templating engine
