@@ -1,0 +1,94 @@
+<div class="section-header d-flex justify-content-between">
+  <h1>Employee</h1>
+
+  <a href="/employees/create" class="btn btn-primary">Add Employee</a>
+</div>
+
+<div class="section-body">
+  <% if (error && error.length) { %>
+  <div class="alert alert-danger">
+    <%= error[0] %>
+  </div>
+  <% } %>
+
+  <% if (success && success.length) { %>
+  <div class="alert alert-success">
+    <%= success[0] %>
+  </div>
+  <% } %>
+
+  <div class="card">
+
+    <form action="/employees" method="GET">
+      <div class="card-header">
+        <h4>Search</h4>
+      </div>
+
+      <div class="card-body">
+        <div class="input-group mb-3">
+          <input type="text" name="search" class="form-control" placeholder="Search by name or email" value="<%= typeof search !== 'undefined' ? search : '' %>">
+          <button class="btn btn-primary">Search</button>
+        </div>
+      </div>
+    </form>
+
+    <div class="card-body table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Photo</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th width="180">Action</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% if (typeof employees !== 'undefined' && employees.length > 0) { %>
+            <% employees.forEach(function(employee) { %>
+              <tr>
+                <td>
+                  <a href="/employees/detail/<%= employee.id %>">
+                    <%= employee.id %>
+                  </a>
+                </td>
+
+                <td>
+                  <% if (employee.photo) { %>
+                  <img src="/uploads/<%= employee.photo %>" width="50">
+                  <% } %>
+                </td>
+                <td><%= employee.name %></td>
+                <td><%= employee.email %></td>
+                <td><%= employee.phone %></td>
+
+                <td>
+                  <a href="/employees/edit/<%= employee.id %>" class="btn btn-sm btn-primary">
+                    Edit
+                  </a>
+
+                  <a href="/employees/delete/<%= employee.id %>" class="btn btn-sm btn-danger" onclick="return confirm('Delete employee?');">
+                    Delete
+                  </a>
+                </td>
+              </tr>
+            <% }); %>
+
+          <% } else { %>
+
+            <tr>
+              <td colspan="6" class="text-center">
+                No employees found
+              </td>
+            </tr>
+
+          <% } %>
+
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+</div>

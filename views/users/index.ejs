@@ -1,0 +1,89 @@
+<div class="section-header d-flex justify-content-between">
+  <h1>User</h1>
+
+  <a href="/users/create" class="btn btn-primary">Add User</a>
+</div>
+
+<div class="section-body">
+  <% if (error && error.length) { %>
+  <div class="alert alert-danger">
+    <%= error[0] %>
+  </div>
+  <% } %>
+
+  <% if (success && success.length) { %>
+  <div class="alert alert-success">
+    <%= success[0] %>
+  </div>
+  <% } %>
+
+  <div class="card">
+
+    <form action="/users" method="GET">
+      <div class="card-header">
+        <h4>Search</h4>
+      </div>
+
+      <div class="card-body">
+        <div class="input-group mb-3">
+          <input type="text" name="search" class="form-control" placeholder="Search by name or username" value="<%= typeof search !== 'undefined' ? search : '' %>">
+          <button class="btn btn-primary">Search</button>
+        </div>
+      </div>
+    </form>
+    
+    <div class="card-body table-responsive">
+      <table class="table">
+
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Username</th>
+            <th>Role</th>
+            <th width="180">Action</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% if (typeof users !== 'undefined' && users.length > 0) { %>
+          <% users.forEach(function(user) { %>
+          <tr>
+            <td>
+              <a href="/users/detail/<%= user.id %>">
+                <%= user.id %>
+              </a>
+            </td>
+
+            <td><%= user.name %></td>
+            <td><%= user.username %></td>
+            <td><%= user.role %></td>
+
+            <td>
+              <a href="/users/edit/<%= user.id %>" class="btn btn-sm btn-primary">
+                Edit
+              </a>
+
+              <a href="/users/delete/<%= user.id %>" class="btn btn-sm btn-danger" onclick="return confirm('Delete user?');">
+                Delete
+              </a>
+            </td>
+          </tr>
+          <% }); %>
+
+          <% } else { %>
+
+          <tr>
+            <td colspan="5" class="text-center">
+              No users found
+            </td>
+          </tr>
+
+          <% } %>
+
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+</div>

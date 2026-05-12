@@ -1,0 +1,26 @@
+<div class="main-sidebar sidebar-style-2">
+  <aside id="sidebar-wrapper">
+    <div class="sidebar-brand">
+      <a href="/">Lyrid Test</a>
+    </div>
+
+    <ul class="sidebar-menu">
+
+      <% if(user.role === 'admin') { %>
+        <li class="<%= currentPage == 'users' ? 'active' : '' %>">
+          <a class="nav-link" href="/users">
+            <i class="fas fa-users"></i>
+            <span>Users</span>
+          </a>
+        </li>
+      <% } %>
+
+      <li class="<%= currentPage == 'employees' ? 'active' : '' %>">
+        <a class="nav-link" href="/employees">
+          <i class="fas fa-user"></i>
+          <span>Employees</span>
+        </a>
+      </li>
+    </ul>
+  </aside>
+</div>
